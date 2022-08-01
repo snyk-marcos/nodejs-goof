@@ -39,7 +39,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          git add /home/runner/work/nodejs-goof/nodejs-goof/results/
+          git add /home/runner/work/nodejs-goof/nodejs-goof/results/*.html
           git commit -m "Uploading artifact file"
           git push          
   
