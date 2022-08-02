@@ -29,7 +29,7 @@ jobs:
       
       - name: Generate current date
         run: |
-          echo "NOW::$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+          echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
           echo $NOW
       
       - name: install snyk-to-html
