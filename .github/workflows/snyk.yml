@@ -39,7 +39,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          git add /home/runner/work/nodejs-goof/nodejs-goof/results/result-sca-$GITHUB_RUN_ATTEMPT.html
+          git add /home/runner/work/nodejs-goof/nodejs-goof/results/*.html
           git commit -m "Uploading artifact file"
           git push
       
@@ -52,3 +52,6 @@ jobs:
         with:
           name: results
           path: results
+          
+      - name: Adding report button to job summary
+        run: echo '<a href=https://htmlpreview.github.io/?https://github.com/snyk-marcos/nodejs-goof/blob/master/results/result-sca-$GITHUB_RUN_ATTEMPT.html alt="SCA Report"> <img src="https://img.shields.io/badge/Snyk-View%20HTML%20report-purple" /></a>' >> $GITHUB_STEP_SUMMARY
