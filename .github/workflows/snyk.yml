@@ -26,14 +26,19 @@ jobs:
       - run: npm install
       - run: npm i -g snyk
       - run: snyk auth ${{ secrets.SNYK_TOKEN }}
-
+      
+      - name: Generate current date
+        run: |
+          echo "NOW::$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+          echo $NOW
+      
       - name: install snyk-to-html
         run: |
           npm install snyk-to-html -g
-          snyk test --json | snyk-to-html -o result-sca.html
+          snyk test --json | snyk-to-html -o result-sca-$NOW.html
           mkdir -p results
           cp -v /home/runner/work/nodejs-goof/nodejs-goof/*.html /home/runner/work/nodejs-goof/nodejs-goof/results
-          
+        
       - name: Commit back to GitHub
         run: |
           git config --local user.email "action@github.com"
@@ -45,7 +50,7 @@ jobs:
       
       - name: Display HTML
         run: |
-          echo 'https://htmlpreview.github.io/?https://github.com/snyk-marcos/nodejs-goof/blob/master/results/result-sca.html'
+          echo 'https://htmlpreview.github.io/?https://github.com/snyk-marcos/nodejs-goof/blob/master/results/result-sca-$NOW.html'
       
       - name: Use the Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
