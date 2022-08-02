@@ -30,7 +30,7 @@ jobs:
       - name: install snyk-to-html
         run: |
           npm install snyk-to-html -g
-          snyk test --json | snyk-to-html -o result-sca-$GITHUB_RUN_ID.html
+          snyk test --json | snyk-to-html -o result-sca-${{github.run_id}}.html
           mkdir -p results
           cp -v /home/runner/work/nodejs-goof/nodejs-goof/*.html /home/runner/work/nodejs-goof/nodejs-goof/results
         
@@ -45,7 +45,7 @@ jobs:
       
       - name: Display HTML
         run: |
-          echo 'https://htmlpreview.github.io/?https://github.com/snyk-marcos/nodejs-goof/blob/master/results/result-sca-${{GITHUB_RUN_ID}}.html'
+          echo 'https://htmlpreview.github.io/?https://github.com/snyk-marcos/nodejs-goof/blob/master/results/result-sca-${{github.run_id}}.html'
       
       - name: Use the Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
@@ -54,4 +54,4 @@ jobs:
           path: results
           
       - name: Adding report button to job summary
-        run: echo '<a href=https://htmlpreview.github.io/?https://github.com/snyk-marcos/nodejs-goof/blob/master/results/result-sca-${{GITHUB_RUN_ID}}.html alt="SCA Report"> <img src="https://img.shields.io/badge/Snyk-View%20HTML%20report-purple" /></a>' >> $GITHUB_STEP_SUMMARY
+        run: echo '<a href=https://htmlpreview.github.io/?https://github.com/snyk-marcos/nodejs-goof/blob/master/results/result-sca-${{github.run_id}}.html alt="SCA Report"> <img src="https://img.shields.io/badge/Snyk-View%20HTML%20report-purple" /></a>' >> $GITHUB_STEP_SUMMARY
